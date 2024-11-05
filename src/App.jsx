@@ -8,6 +8,8 @@ function App() {
   const [playerNames, setPlayerNames] = useState([]);
   const [addPlayers, setAddPlayers] = useState(true);
   const [playerPoints, setPlayerPoints] = useState([0, 0, 0, 0]);
+  const [round, setRounds] = useState(0);
+  const [winnerName, setWinnerName] = useState("");
 
   // Function to get player data from AddPlayer component
   const getPlayerData = (playerList) => {
@@ -17,6 +19,16 @@ function App() {
   // Function to get points from GetPoints component
   const getPoints = (points) => {
     setPlayerPoints(points);
+  };
+
+  //Function to get round number
+  const getRound = (newRound) => {
+    setRounds(newRound);
+  };
+
+  //Function to get winner
+  const getWinner = (winner) => {
+    setWinnerName(winner);
   };
 
   // Function to reset game
@@ -36,11 +48,21 @@ function App() {
       {/*<PlayerList playerNames={playerNames} /> */}
 
       {!addPlayers && (
-        <GetPoints playerNames={playerNames} getPoints={getPoints} />
+        <GetPoints
+          playerNames={playerNames}
+          getPoints={getPoints}
+          getRound={getRound}
+          getWinner={getWinner}
+        />
       )}
 
       {!addPlayers && (
-        <Points playerNames={playerNames} playerPoints={playerPoints} />
+        <Points
+          playerNames={playerNames}
+          playerPoints={playerPoints}
+          round={round}
+          winnerName={winnerName}
+        />
       )}
 
       {/* Button to reset player list */}

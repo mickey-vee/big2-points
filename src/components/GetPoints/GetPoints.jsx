@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./GetPoints.scss";
 
-const GetPoints = ({ playerNames, getPoints }) => {
+const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
   const [points, setPoints] = useState(Array(playerNames.length).fill(""));
 
   const submitPoints = (e) => {
@@ -9,6 +9,13 @@ const GetPoints = ({ playerNames, getPoints }) => {
 
     getPoints(points.map(Number));
     setPoints(Array(playerNames.length).fill(""));
+
+    // Calculate the next round number
+    getRound((prevRound) => prevRound + 1);
+  };
+
+  const calculatePoints = (e) => {
+    e.preventDefault();
   };
 
   return (
@@ -30,6 +37,14 @@ const GetPoints = ({ playerNames, getPoints }) => {
                 }}
               />
             </label>
+            <button
+              type="button"
+              onClick={(e) => {
+                getWinner(player);
+              }}
+            >
+              Round Winner
+            </button>
           </div>
         ))}
         <button type="submit">Enter points</button>
