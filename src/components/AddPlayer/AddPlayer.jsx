@@ -2,10 +2,10 @@ import "./AddPlayer.scss";
 import { useState } from "react";
 
 const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
-  const [p1, setP1] = useState("");
-  const [p2, setP2] = useState("");
-  const [p3, setP3] = useState("");
-  const [p4, setP4] = useState("");
+  const [p1, setP1] = useState("1");
+  const [p2, setP2] = useState("2");
+  const [p3, setP3] = useState("3");
+  const [p4, setP4] = useState("4");
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
     <>
       <div>
         <form onSubmit={submitForm}>
-          <label htmlFor="">
+          <label>
             Player 1
             <input
               onChange={(e) => {
@@ -31,7 +31,7 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               name="p1"
             />
           </label>
-          <label htmlFor="">
+          <label>
             Player 2
             <input
               onChange={(e) => {
@@ -41,7 +41,7 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               name="p2"
             />
           </label>
-          <label htmlFor="">
+          <label>
             Player 3
             <input
               onChange={(e) => {
@@ -51,7 +51,7 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               name="p3"
             />
           </label>
-          <label htmlFor="">
+          <label>
             Player 4
             <input
               onChange={(e) => {
