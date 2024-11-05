@@ -1,7 +1,7 @@
 import "./AddPlayer.scss";
 import { useState } from "react";
 
-const AddPlayer = () => {
+const AddPlayer = ({ getPlayerData }) => {
   const [p1, setP1] = useState("");
   const [p2, setP2] = useState("");
   const [p3, setP3] = useState("");
@@ -10,12 +10,10 @@ const AddPlayer = () => {
   const submitForm = (e) => {
     e.preventDefault();
 
-    const players = {
-      p1: p1,
-      p2: p2,
-      p3: p3,
-      p4: p4,
-    };
+    const playerList = [p1, p2, p3, p4];
+
+    // Takes playerData as prop/function from app.jsx and passes player data from form to function
+    getPlayerData(playerList);
   };
 
   return (
