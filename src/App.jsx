@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddPlayer from "./components/AddPlayer/AddPlayer";
 import PlayerList from "./components/PlayerList/PlayerList";
 import GetPoints from "./components/GetPoints/GetPoints";
+import Points from "./components/Points/Points";
 
 function App() {
   const [playerNames, setPlayerNames] = useState([]);
@@ -32,10 +33,14 @@ function App() {
           setAddPlayers={setAddPlayers}
         />
       )}
-      {/*      <PlayerList playerNames={playerNames} /> */}
+      {/*<PlayerList playerNames={playerNames} /> */}
 
       {!addPlayers && (
         <GetPoints playerNames={playerNames} getPoints={getPoints} />
+      )}
+
+      {!addPlayers && (
+        <Points playerNames={playerNames} playerPoints={playerPoints} />
       )}
 
       {/* Button to reset player list */}
