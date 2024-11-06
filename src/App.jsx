@@ -7,37 +7,31 @@ import "./App.scss";
 function App() {
   const [playerNames, setPlayerNames] = useState([]);
   const [addPlayers, setAddPlayers] = useState(true);
-  const [playerPoints, setPlayerPoints] = useState([0, 0, 0, 0]);
-  const [round, setRounds] = useState(0);
-  const [winnerName, setWinnerName] = useState("");
+  const [gameDetails, setGameDetails] = useState({
+    playerPoints: [0, 0, 0, 0],
+    round: 0,
+    winnerName: "",
+  });
 
   // Function to get player data from AddPlayer component
   const getPlayerData = (playerList) => {
     setPlayerNames(playerList);
   };
 
-  // Function to get points from GetPoints component
-  const getPoints = (points) => {
-    setPlayerPoints(points);
-  };
-
-  //Function to get round number
-  const getRound = (newRound) => {
-    setRounds(newRound);
-  };
-
-  //Function to get winner
-  const getWinner = (winner) => {
-    setWinnerName(winner);
+  // Function to get game details
+  const getGameDetails = (points, newRound, winner) => {
+    setGameDetails({
+      playerPoints: points,
+      round: newRound,
+      winnerName: winner,
+    });
   };
 
   // Function to reset game
   const resetGame = () => {
     confirm("Do you want to reset the game?");
     setAddPlayers(true);
-    setPlayerPoints([0, 0, 0, 0]);
-    setWinnerName("");
-    setRounds(0);
+    setGameDetails({ playerPoints: [0, 0, 0, 0], round: 0, winnerName: "" });
   };
 
   return (
@@ -50,20 +44,13 @@ function App() {
       )}
 
       {!addPlayers && (
-        <GetPoints
-          playerNames={playerNames}
-          getPoints={getPoints}
-          getRound={getRound}
-          getWinner={getWinner}
-        />
+        <GetPoints playerNames={playerNames} getGameDetails={getGameDetails} />
       )}
 
       {!addPlayers && (
         <Points
           playerNames={playerNames}
-          playerPoints={playerPoints}
-          round={round}
-          winnerName={winnerName}
+          gameDetails={gameDetails} // Pass the gameDetails object
         />
       )}
 

@@ -1,19 +1,22 @@
 import { useState } from "react";
 import "./GetPoints.scss";
 
-const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
-  const [points, setPoints] = useState(Array(playerNames.length).fill(""));
-  const [winner, setWinner] = useState("");
+const GetPoints = ({ playerNames, getGameDetails }) => {
+  // Use a single object to store both points and winner
+  const [gameDetails, setGameDetails] = useState({
+    points: Array(playerNames.length).fill(""),
+    winner: "",
+  });
 
   const submitPoints = (e) => {
     e.preventDefault();
 
-    // If there's no winner, prevent submission
-    if (!winner) return;
+    // If there's no winner prevent submission
+    if (!gameDetails.winner) return;
 
     // Sets winner to 0 points
-    const winnerIndex = playerNames.indexOf(winner);
-    const updatedPoints = [...points];
+    const winnerIndex = playerNames.indexOf(gameDetails.winner);
+    const updatedPoints = [...gameDetails.points];
     updatedPoints[winnerIndex] = 0;
 
     // Updates points for all players
@@ -28,65 +31,67 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
       }
     });
 
-    // Sends point info to parent component
-    getPoints(calculatePoints);
+    // Resets points to blank
+    setGameDetails({ points: Array(playerNames.length).fill(""), winner: "" });
 
-    // Resets points to 0
-    setPoints(Array(playerNames.length).fill(""));
+    getGameDetails(
+      calculatePoints,
+      (prevRound) => prevRound + 1,
+      gameDetails.winner
+    );
+  };
 
-    // Sends round info to parent component
-    getRound((prevRound) => prevRound + 1);
+  const handlePointsChange = (e, index) => {
+    const newPoints = [...gameDetails.points];
+    newPoints[index] = Number(e.target.value);
+    setGameDetails((prevState) => ({ ...prevState, points: newPoints }));
+  };
+
+  const handleSetWinner = (player) => {
+    setGameDetails((prevState) => ({ ...prevState, winner: player }));
   };
 
   return (
-    <>
-      <form id="points-form" onSubmit={submitPoints} className="points-form">
-        <div className="points-form__wrapper">
-          {playerNames.map((player, index) => {
-            // Conditionally applying a special class for the winner
-            const isWinner = player === winner;
+    <form id="points-form" onSubmit={submitPoints} className="points-form">
+      <div className="points-form__wrapper">
+        {playerNames.map((player, index) => {
+          // Conditionally applying a special class for the winner
+          const isWinner = player === gameDetails.winner;
 
-            return (
-              <div key={index} className="points-form__player">
-                <label className="points-form__label">
-                  {player} cards left:
-                  <input
-                    className="points-form__input"
-                    disabled={!winner || (isWinner && winner !== "")}
-                    type="number"
-                    required
-                    value={points[index]}
-                    onChange={(e) => {
-                      const newPoints = [...points];
-                      newPoints[index] = Number(e.target.value);
-                      setPoints(newPoints);
-                    }}
-                  />
-                </label>
-                <button
-                  className={`points-form__button ${
-                    isWinner
-                      ? " points-form__button points-form__button--winner"
-                      : ""
-                  }`}
-                  type="button"
-                  onClick={() => {
-                    getWinner(player);
-                    setWinner(player);
-                  }}
-                >
-                  Round Winner
-                </button>
-              </div>
-            );
-          })}
-        </div>
+          return (
+            <div key={index} className="points-form__player">
+              <label className="points-form__label">
+                {player} cards left:
+                <input
+                  className="points-form__input"
+                  disabled={
+                    !gameDetails.winner ||
+                    (isWinner && gameDetails.winner !== "")
+                  }
+                  type="number"
+                  required
+                  value={gameDetails.points[index]}
+                  onChange={(e) => handlePointsChange(e, index)}
+                />
+              </label>
+              <button
+                className={`points-form__button ${
+                  isWinner ? " points-form__button--winner" : ""
+                }`}
+                type="button"
+                onClick={() => handleSetWinner(player)}
+              >
+                Round Winner
+              </button>
+            </div>
+          );
+        })}
+      </div>
 
-        <button type="submit" className="points-form__submit-button">
-          Enter points
-        </button>
-      </form>
-    </>
+      <button type="submit" className="points-form__submit-button">
+        Enter points
+      </button>
+    </form>
   );
 };
 
