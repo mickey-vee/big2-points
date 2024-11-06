@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import "./Points.scss";
 
 const Points = ({ playerNames, playerPoints, round, winnerName }) => {
-  const [newPoints, setNewPoints] = useState(Array(playerNames.length).fill(0));
-
+  const [totalPoints, setTotalPoints] = useState(
+    Array(playerNames.length).fill(0)
+  );
   const [roundDetails, setRoundDetails] = useState([]);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    setNewPoints((prevPoints) =>
+    setTotalPoints((prevPoints) =>
       prevPoints.map((point, index) => point + (playerPoints[index] || 0))
     );
-
-    console.log(playerPoints);
 
     let playerDetails = playerNames.map((player, index) => ({
       playername: player,
@@ -25,24 +25,51 @@ const Points = ({ playerNames, playerPoints, round, winnerName }) => {
     });
   }, [playerPoints]);
 
+  useEffect(() => {
+    if (roundDetails && roundDetails.winner) {
+      setHistory((prevHistory) => {
+        return [...prevHistory, roundDetails];
+      });
+    }
+  }, [roundDetails]);
+
+  useEffect(() => {
+    console.log(history);
+  }, [history]);
+
   return (
     <>
-      <div>
-        <p>
-          Round {round} - Winner {roundDetails.winner}
-        </p>
-      </div>
-
-      <section>
-        <p>Total points</p>
-        {playerNames.map((player, index) => (
-          <div key={index}>
-            <p>
-              {player} total points: {newPoints[index]}
+      <div className="rounds">
+        {history.map((item, index) => (
+          <div key={index} className="rounds-card">
+            <p className="rounds-title">
+              Round {item.round} winner - {item.winner}
             </p>
+            <div className="rounds-player-info">
+              {item.playerdetails.map((player) => {
+                return (
+                  <div key={player + 1}>
+                    <p>{player.playername}</p>
+                    <p>{player.playerpoints}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ))}
-      </section>
+
+        <div className="rounds-card">
+          <p className="rounds-title">Total points</p>
+          <div className="rounds-player-info">
+            {playerNames.map((player, index) => (
+              <div key={index}>
+                <p>{player} total</p>
+                <p>{totalPoints[index]}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   );
 };

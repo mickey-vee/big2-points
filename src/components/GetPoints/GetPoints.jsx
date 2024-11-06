@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./GetPoints.scss";
 
 const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
-  const [points, setPoints] = useState(Array(playerNames.length).fill(0));
+  const [points, setPoints] = useState(Array(playerNames.length).fill(""));
   const [winner, setWinner] = useState("");
 
   const submitPoints = (e) => {
@@ -24,7 +24,7 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
     getPoints(calculatePoints);
 
     // Resets points to 0
-    setPoints(Array(playerNames.length).fill(0));
+    setPoints(Array(playerNames.length).fill(""));
     getRound((prevRound) => prevRound + 1);
   };
 
