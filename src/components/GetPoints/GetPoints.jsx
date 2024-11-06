@@ -8,10 +8,18 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
   const submitPoints = (e) => {
     e.preventDefault();
 
+    // If there's no winner, prevent submission
+    if (!winner) return;
+
+    // Sets winner to 0 points
+    const winnerIndex = playerNames.indexOf(winner);
+    const updatedPoints = [...points];
+    updatedPoints[winnerIndex] = 0;
+
     // Updates points for all players
-    let calculatePoints = points.map((point) => {
-      if (Number(point) === 0) {
-        return points.reduce(
+    let calculatePoints = updatedPoints.map((point, index) => {
+      if (index === winnerIndex) {
+        return updatedPoints.reduce(
           (accumulator, currentValue) => accumulator + Number(currentValue),
           0
         );
@@ -20,11 +28,13 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
       }
     });
 
-    // Sends point info to points component
+    // Sends point info to parent component
     getPoints(calculatePoints);
 
     // Resets points to 0
     setPoints(Array(playerNames.length).fill(""));
+
+    // Sends round info to parent component
     getRound((prevRound) => prevRound + 1);
   };
 
@@ -44,6 +54,7 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
                     className="points-form__input"
                     disabled={!winner || (isWinner && winner !== "")}
                     type="number"
+                    required
                     value={points[index]}
                     onChange={(e) => {
                       const newPoints = [...points];
