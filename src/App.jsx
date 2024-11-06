@@ -35,6 +35,9 @@ function App() {
   const resetGame = () => {
     confirm("Do you want to reset the game?");
     setAddPlayers(true);
+    setPlayerPoints([0, 0, 0, 0]);
+    setWinnerName("");
+    setRounds(0);
   };
 
   return (
