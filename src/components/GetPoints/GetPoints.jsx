@@ -54,7 +54,9 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
                 </label>
                 <button
                   className={`points-form__button ${
-                    isWinner ? "points-form__button--winner" : ""
+                    isWinner
+                      ? " points-form__button points-form__button--winner"
+                      : ""
                   }`}
                   type="button"
                   onClick={() => {
