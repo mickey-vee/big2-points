@@ -11,6 +11,8 @@ const Points = ({ playerNames, playerPoints, round, winnerName }) => {
       prevPoints.map((point, index) => point + (playerPoints[index] || 0))
     );
 
+    console.log(playerPoints);
+
     let playerDetails = playerNames.map((player, index) => ({
       playername: player,
       playerpoints: playerPoints[index],

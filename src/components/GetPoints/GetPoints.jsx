@@ -2,13 +2,32 @@ import { useState } from "react";
 import "./GetPoints.scss";
 
 const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
-  const [points, setPoints] = useState(Array(playerNames.length).fill(""));
+  const [points, setPoints] = useState(Array(playerNames.length).fill(0));
   const [winner, setWinner] = useState("");
 
   const submitPoints = (e) => {
     e.preventDefault();
-    getPoints(points.map(Number));
-    setPoints(Array(playerNames.length).fill(""));
+
+    // Calculate the winners points
+    let winnerPoints = points.reduce(
+      (accumulator, currentValue) => accumulator + Number(currentValue),
+      0
+    );
+
+    // Updates points for all players
+    let calculatePoints = points.map((point) => {
+      if (Number(point) === 0) {
+        return winnerPoints;
+      } else {
+        return point * -1;
+      }
+    });
+
+    // Sends point info to points component
+    getPoints(calculatePoints);
+
+    // Resets points to 0
+    setPoints(Array(playerNames.length).fill(0));
     getRound((prevRound) => prevRound + 1);
   };
 
@@ -21,16 +40,16 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
 
           return (
             <div key={index}>
-              <label name={player}>
+              <label>
                 {player} cards left:
                 <input
                   className="points-input"
-                  name={player}
+                  disabled={isWinner}
                   type="number"
                   value={points[index]}
                   onChange={(e) => {
                     const newPoints = [...points];
-                    newPoints[index] = e.target.value;
+                    newPoints[index] = Number(e.target.value);
                     setPoints(newPoints);
                   }}
                 />
