@@ -65,14 +65,16 @@ function App() {
       )}
 
       {/* Button to reset player list */}
-      <button
-        className="reset-button"
-        onClick={() => {
-          resetGame();
-        }}
-      >
-        Reset Game
-      </button>
+      {!addPlayers && (
+        <button
+          className="reset-button"
+          onClick={() => {
+            resetGame();
+          }}
+        >
+          Reset Game
+        </button>
+      )}
     </>
   );
 }
