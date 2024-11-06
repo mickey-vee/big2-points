@@ -8,16 +8,13 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
   const submitPoints = (e) => {
     e.preventDefault();
 
-    // Calculate the winners points
-    let winnerPoints = points.reduce(
-      (accumulator, currentValue) => accumulator + Number(currentValue),
-      0
-    );
-
     // Updates points for all players
     let calculatePoints = points.map((point) => {
       if (Number(point) === 0) {
-        return winnerPoints;
+        return points.reduce(
+          (accumulator, currentValue) => accumulator + Number(currentValue),
+          0
+        );
       } else {
         return point * -1;
       }
@@ -44,7 +41,7 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
                 {player} cards left:
                 <input
                   className="points-input"
-                  disabled={isWinner}
+                  disabled={!winner || (isWinner && winner !== "")}
                   type="number"
                   value={points[index]}
                   onChange={(e) => {
