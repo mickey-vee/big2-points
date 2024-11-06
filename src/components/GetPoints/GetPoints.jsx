@@ -24,7 +24,7 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
         {playerNames.map((player, index) => (
           <div key={index}>
             <label name={player}>
-              {player} cards left
+              {player} cards left:
               <input
                 className="points-input"
                 name={player}

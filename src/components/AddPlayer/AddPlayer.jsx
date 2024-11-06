@@ -2,10 +2,10 @@ import "./AddPlayer.scss";
 import { useState } from "react";
 
 const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
-  const [p1, setP1] = useState("1");
-  const [p2, setP2] = useState("2");
-  const [p3, setP3] = useState("3");
-  const [p4, setP4] = useState("4");
+  const [p1, setP1] = useState("Mickey");
+  const [p2, setP2] = useState("Taryn");
+  const [p3, setP3] = useState("Enney");
+  const [p4, setP4] = useState("Reza");
 
   const submitForm = (e) => {
     e.preventDefault();
