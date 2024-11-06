@@ -2,6 +2,7 @@ import { useState } from "react";
 import AddPlayer from "./components/AddPlayer/AddPlayer";
 import GetPoints from "./components/GetPoints/GetPoints";
 import Points from "./components/Points/Points";
+import Header from "./components/Header/Header";
 import "./App.scss";
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 
   return (
     <>
+      <Header />
       {addPlayers && (
         <AddPlayer
           getPlayerData={getPlayerData}
