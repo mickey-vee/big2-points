@@ -39,34 +39,37 @@ const Points = ({ playerNames, playerPoints, round, winnerName }) => {
 
   return (
     <>
-      <div>
+      <div className="rounds">
         {history.map((item, index) => (
-          <div key={index}>
-            <p>
-              Round {item.round} - Winner {item.winner}
+          <div key={index} className="rounds-card">
+            <p className="rounds-title">
+              Round {item.round} winner - {item.winner}
             </p>
-            {item.playerdetails.map((player) => {
-              return (
-                <div key={player + 1}>
-                  <p>{player.playername}</p>
-                  <p>{player.playerpoints}</p>
-                </div>
-              );
-            })}
+            <div className="rounds-player-info">
+              {item.playerdetails.map((player) => {
+                return (
+                  <div key={player + 1}>
+                    <p>{player.playername}</p>
+                    <p>{player.playerpoints}</p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         ))}
-      </div>
 
-      <section>
-        <p>Total points</p>
-        {playerNames.map((player, index) => (
-          <div key={index}>
-            <p>
-              {player} total points: {totalPoints[index]}
-            </p>
+        <div className="rounds-card">
+          <p className="rounds-title">Total points</p>
+          <div className="rounds-player-info">
+            {playerNames.map((player, index) => (
+              <div key={index}>
+                <p>{player} total</p>
+                <p>{totalPoints[index]}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </section>
+        </div>
+      </div>
     </>
   );
 };
