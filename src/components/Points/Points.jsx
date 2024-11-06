@@ -33,10 +33,6 @@ const Points = ({ playerNames, playerPoints, round, winnerName }) => {
     }
   }, [roundDetails]);
 
-  useEffect(() => {
-    console.log(history);
-  }, [history]);
-
   return (
     <>
       <div className="rounds">
@@ -48,7 +44,7 @@ const Points = ({ playerNames, playerPoints, round, winnerName }) => {
             <div className="rounds-player-info">
               {item.playerdetails.map((player) => {
                 return (
-                  <div key={player + 1}>
+                  <div>
                     <p>{player.playername}</p>
                     <p>{player.playerpoints}</p>
                   </div>

@@ -20,8 +20,8 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
   return (
     <>
       <div>
-        <form onSubmit={submitForm}>
-          <label>
+        <form onSubmit={submitForm} className="player-form">
+          <label className="player-form__label">
             Player 1
             <input
               onChange={(e) => {
@@ -29,9 +29,11 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               }}
               type="text"
               name="p1"
+              placeholder="Enter player name"
+              className="player-form__input"
             />
           </label>
-          <label>
+          <label className="player-form__label">
             Player 2
             <input
               onChange={(e) => {
@@ -39,9 +41,11 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               }}
               type="text"
               name="p2"
+              placeholder="Enter player name"
+              className="player-form__input"
             />
           </label>
-          <label>
+          <label className="player-form__label">
             Player 3
             <input
               onChange={(e) => {
@@ -49,9 +53,11 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               }}
               type="text"
               name="p3"
+              placeholder="Enter player name"
+              className="player-form__input"
             />
           </label>
-          <label>
+          <label className="player-form__label">
             Player 4
             <input
               onChange={(e) => {
@@ -59,9 +65,13 @@ const AddPlayer = ({ getPlayerData, setAddPlayers }) => {
               }}
               type="text"
               name="p4"
+              placeholder="Enter player name"
+              className="player-form__input"
             />
           </label>
-          <button type="submit">Enter</button>
+          <button type="submit" className="player-form__button">
+            Start Game
+          </button>
         </form>
       </div>
     </>
