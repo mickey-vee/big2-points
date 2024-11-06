@@ -31,40 +31,47 @@ const GetPoints = ({ playerNames, getPoints, getRound, getWinner }) => {
   return (
     <>
       <form id="points-form" onSubmit={submitPoints} className="points-form">
-        {playerNames.map((player, index) => {
-          // Conditionally applying a special class for the winner
-          const isWinner = player === winner;
+        <div className="points-form__wrapper">
+          {playerNames.map((player, index) => {
+            // Conditionally applying a special class for the winner
+            const isWinner = player === winner;
 
-          return (
-            <div key={index}>
-              <label>
-                {player} cards left:
-                <input
-                  className="points-input"
-                  disabled={!winner || (isWinner && winner !== "")}
-                  type="number"
-                  value={points[index]}
-                  onChange={(e) => {
-                    const newPoints = [...points];
-                    newPoints[index] = Number(e.target.value);
-                    setPoints(newPoints);
+            return (
+              <div key={index} className="points-form__player">
+                <label className="points-form__label">
+                  {player} cards left:
+                  <input
+                    className="points-form__input"
+                    disabled={!winner || (isWinner && winner !== "")}
+                    type="number"
+                    value={points[index]}
+                    onChange={(e) => {
+                      const newPoints = [...points];
+                      newPoints[index] = Number(e.target.value);
+                      setPoints(newPoints);
+                    }}
+                  />
+                </label>
+                <button
+                  className={`points-form__button ${
+                    isWinner ? "points-form__button--winner" : ""
+                  }`}
+                  type="button"
+                  onClick={() => {
+                    getWinner(player);
+                    setWinner(player);
                   }}
-                />
-              </label>
-              <button
-                className={isWinner ? "winner-button" : ""}
-                type="button"
-                onClick={() => {
-                  getWinner(player);
-                  setWinner(player);
-                }}
-              >
-                Round Winner
-              </button>
-            </div>
-          );
-        })}
-        <button type="submit">Enter points</button>
+                >
+                  Round Winner
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
+        <button type="submit" className="points-form__submit-button">
+          Enter points
+        </button>
       </form>
     </>
   );
