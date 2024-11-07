@@ -24,4 +24,19 @@ p {
     padding: 5px;
     font-weight: 700;
   }
+
+  &__label {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__edit {
+    width: 20px;
+  }
+
+  &__button {
+    all: unset;
+    cursor: pointer;
+    margin-left: 10px;
+  }
 }

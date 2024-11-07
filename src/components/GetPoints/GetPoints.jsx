@@ -34,11 +34,7 @@ const GetPoints = ({ playerNames, getGameDetails }) => {
     // Resets points to blank
     setGameDetails({ points: Array(playerNames.length).fill(""), winner: "" });
 
-    getGameDetails(
-      calculatePoints,
-      (prevRound) => prevRound + 1,
-      gameDetails.winner
-    );
+    getGameDetails(calculatePoints, gameDetails.winner);
   };
 
   const handlePointsChange = (e, index) => {

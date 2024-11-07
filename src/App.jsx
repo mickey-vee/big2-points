@@ -19,12 +19,17 @@ function App() {
   };
 
   // Function to get game details
-  const getGameDetails = (points, newRound, winner) => {
-    setGameDetails({
+  const getGameDetails = (points, winner) => {
+    setGameDetails((prevGameDetails) => ({
       playerPoints: points,
-      round: newRound,
+      round: prevGameDetails.round + 1, // Increment the round by 1
       winnerName: winner,
-    });
+    }));
+  };
+
+  //Function to get round
+  const roundNumber = () => {
+    (prevRound) => prevRound + 1;
   };
 
   // Function to reset game
