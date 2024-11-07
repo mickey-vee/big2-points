@@ -11,6 +11,7 @@ const Points = ({ playerNames, gameDetails }) => {
   // Destructure gameDetails into playerPoints, round, and winnerName
   const { playerPoints, round, winnerName } = gameDetails;
 
+  // Updating the points for each player
   useEffect(() => {
     setTotalPoints((prevPoints) =>
       prevPoints.map((point, index) => point + (playerPoints[index] || 0))
@@ -28,6 +29,7 @@ const Points = ({ playerNames, gameDetails }) => {
     });
   }, [playerPoints, playerNames, round, winnerName]);
 
+  // updating the round
   useEffect(() => {
     if (roundDetails && roundDetails.winner) {
       setHistory((prevHistory) => {
@@ -40,9 +42,18 @@ const Points = ({ playerNames, gameDetails }) => {
     <div className="rounds">
       {history.map((item, index) => (
         <div key={index} className="rounds-card">
-          <p className="rounds-title">
-            Round {item.round} winner - {item.winner}
-          </p>
+          <div className="rounds__label">
+            <p className="rounds-title">
+              Round {item.round} winner - {item.winner}
+            </p>
+            <button className="rounds__button">
+              <img
+                src="./src/assets/icons/edit.svg"
+                alt="edit-button"
+                className="rounds__edit"
+              />
+            </button>
+          </div>
           <div className="rounds-player-info">
             {item.playerdetails.map((player, playerIndex) => (
               <div key={playerIndex}>
