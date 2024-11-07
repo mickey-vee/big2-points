@@ -68,7 +68,7 @@ const GetPoints = ({ playerNames, getGameDetails }) => {
                     !gameDetails.winner ||
                     (isWinner && gameDetails.winner !== "")
                   }
-                  type="number"
+                  type="text"
                   required
                   value={gameDetails.points[index]}
                   onChange={(e) => handlePointsChange(e, index)}
