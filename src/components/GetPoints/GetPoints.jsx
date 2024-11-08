@@ -7,7 +7,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
     points: Array(playerNames.length).fill(""),
     winner: "",
   });
-  const [editRoundNumber, setEditRoundNumber] = useState("");
+  const [editRoundNumber, setEditRoundNumber] = useState(false);
 
   const submitPoints = (e) => {
     e.preventDefault();
@@ -35,6 +35,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
     // Resets points to blank
     setRoundDetails({ points: Array(playerNames.length).fill(""), winner: "" });
     getGameDetails(calculatePoints, roundDetails.winner);
+    setEditRoundNumber(false);
   };
 
   const handlePointsChange = (e, index) => {
@@ -48,45 +49,66 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
   };
 
   // Function to edit round details.
-  const editRound = (round) => {
-    setEditRoundNumber(round);
-    console.log(round);
-    console.log(gameDetails.winnerName);
+  const editRound = () => {
+    setEditRoundNumber(true);
   };
+
+  const roundsArray = Array.from(
+    { length: gameDetails.round },
+    (_, index) => index + 1
+  );
 
   return (
     <form id="points-form" onSubmit={submitPoints} className="points-form">
+      {editRoundNumber && (
+        <div className="points-form__edit-wrapper">
+          <h2 className="points-form__edit-text">Choose round to edit: </h2>
+          <select name="roundNumber" id="roundNumber">
+            {roundsArray.map((round) => {
+              return <option value={round}>{round}</option>;
+            })}
+          </select>
+        </div>
+      )}
       <div className="points-form__wrapper">
         {playerNames.map((player, index) => {
           // Conditionally applying a special class for the winner
           const isWinner = player === roundDetails.winner;
 
           return (
-            <div key={index} className="points-form__player">
-              <label className="points-form__label">
-                {player} cards left:
-                <input
-                  className="points-form__input"
-                  disabled={
-                    !roundDetails.winner ||
-                    (isWinner && roundDetails.winner !== "")
-                  }
-                  type="text"
-                  required
-                  value={roundDetails.points[index]}
-                  onChange={(e) => handlePointsChange(e, index)}
-                />
-              </label>
-              <button
-                className={`points-form__button ${
-                  isWinner ? " points-form__button--winner" : ""
-                }`}
-                type="button"
-                onClick={() => handleSetWinner(player)}
-              >
-                Round Winner
-              </button>
-            </div>
+            <>
+              <div key={index} className="points-form__player">
+                <label className="points-form__label">
+                  {player} cards left:
+                  <input
+                    className="points-form__input"
+                    disabled={
+                      !roundDetails.winner ||
+                      (isWinner && roundDetails.winner !== "")
+                    }
+                    type="text"
+                    required
+                    value={roundDetails.points[index]}
+                    onChange={(e) => handlePointsChange(e, index)}
+                  />
+                </label>
+                <button
+                  className={`points-form__button ${
+                    isWinner ? " points-form__button--winner" : ""
+                  }`}
+                  type="button"
+                  onClick={() => handleSetWinner(player)}
+                >
+                  Round Winner
+                </button>
+              </div>
+
+              {editRoundNumber && (
+                <div>
+                  <p>test</p>
+                </div>
+              )}
+            </>
           );
         })}
       </div>
@@ -97,7 +119,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
         <button
           className="points-form__edit-button"
           onClick={() => {
-            editRound(gameDetails.round);
+            editRound();
           }}
         >
           <img
