@@ -62,4 +62,18 @@
   &__edit-icon {
     width: 20px;
   }
+
+  &__edit-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: lightblue;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  &__edit-text {
+    margin: 0;
+    padding: 10px;
+  }
 }

@@ -62,7 +62,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
     <form id="points-form" onSubmit={submitPoints} className="points-form">
       {editRoundNumber && (
         <div className="points-form__edit-wrapper">
-          <h2 className="points-form__edit-text">Choose round to edit: </h2>
+          <h3 className="points-form__edit-text">Choose round to edit: </h3>
           <select name="roundNumber" id="roundNumber">
             {roundsArray.map((round) => {
               return <option value={round}>{round}</option>;
@@ -102,12 +102,6 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
                   Round Winner
                 </button>
               </div>
-
-              {editRoundNumber && (
-                <div>
-                  <p>test</p>
-                </div>
-              )}
             </>
           );
         })}
