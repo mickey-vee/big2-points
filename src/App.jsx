@@ -27,11 +27,6 @@ function App() {
     }));
   };
 
-  //Function to get round
-  const roundNumber = () => {
-    (prevRound) => prevRound + 1;
-  };
-
   // Function to reset game
   const resetGame = () => {
     confirm("Do you want to reset the game?");
@@ -49,7 +44,11 @@ function App() {
       )}
 
       {!addPlayers && (
-        <GetPoints playerNames={playerNames} getGameDetails={getGameDetails} />
+        <GetPoints
+          playerNames={playerNames}
+          getGameDetails={getGameDetails}
+          gameDetails={gameDetails}
+        />
       )}
 
       {!addPlayers && (

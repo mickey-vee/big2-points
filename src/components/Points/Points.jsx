@@ -27,8 +27,6 @@ const Points = ({ playerNames, gameDetails }) => {
       round: round,
       playerdetails: playerDetails,
     });
-
-    console.log(roundDetails);
   }, [playerPoints, playerNames, round, winnerName]);
 
   // updating the round
@@ -37,13 +35,8 @@ const Points = ({ playerNames, gameDetails }) => {
       setHistory((prevHistory) => {
         return [...prevHistory, roundDetails];
       });
-
-      console.log(roundDetails);
     }
   }, [roundDetails]);
-
-  // Function to edit round details.
-  const editRound = () => {};
 
   return (
     <div className="rounds">
@@ -53,13 +46,6 @@ const Points = ({ playerNames, gameDetails }) => {
             <p className="rounds-title">
               Round {item.round} winner - {item.winner}
             </p>
-            <button className="rounds__button" onClick={editRound}>
-              <img
-                src="./src/assets/icons/edit.svg"
-                alt="edit-button"
-                className="rounds__edit"
-              />
-            </button>
           </div>
           <div className="rounds-player-info">
             {item.playerdetails.map((player, playerIndex) => (
