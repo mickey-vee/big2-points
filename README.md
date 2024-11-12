@@ -1,25 +1,28 @@
 # Big 2 Points Calculator
 
-A simple React app to help you calculate points in the card game **Big 2**! This app tracks scores, calculates penalties, and helps keep the game organized.
+A simple React app to help you calculate points in the card game Big 2! This app tracks scores, calculates penalties, and helps keep the game organized.
 
-## Features
+## Current Features
 
-- **Points Calculation**: Automatically calculates points based on the cards left in each player’s hand.
-- **Score Tracking**: Keeps track of cumulative scores for each player over multiple rounds.
-- **Adjustable Rules**: Customize scoring rules (e.g., penalty per card left).
-- **Reset and Edit Options**: Easily reset scores and edit points as needed.
+- **Add Players**: Allows up to 4 players to join the game.
+- **Points Entry**: Enter points at the end of each round and calculate the total for each player.
+- **Round Tracking**: Displays information for each round played.
+- **Game Reset**: Clear all scores to start a new game.
 
-## Getting Started
+## Future Features
 
-1. Clone the repository and navigate to the project folder.
-2. Install dependencies with `npm install` or `yarn install`.
-3. Run the app with `npm start` or `yarn start`.
-4. Access the app at [http://localhost:3000](http://localhost:3000).
+- **Edit Points**: Modify points for individual rounds if needed.
+- **Player Count Selection**: Set the number of players before starting the game.
+- **Multipliers**: Apply score multipliers if players hold more than a set number of cards at the end of the round.
+- **Save Scores**: Option to save game progress and scores.
+- **Rules Page**: Display game rules and scoring guidelines.
 
 ## Usage
 
 1. **Add Players**: Enter player names to start a new game.
-2. **Enter Scores**: At the end of each round, input the number of cards left for each player.
-3. **Calculate Points**: The app will automatically calculate and display points based on the rules.
+2. **Enter Scores**: Input the number of cards left for each player at the end of each round.
+3. **Calculate Points**: The app calculates points automatically based on the rules.
 4. **View Cumulative Scores**: Track scores across multiple rounds.
-5. **Reset or Edit**: Clear all scores to start a new game, or edit scores if needed.
+5. **Reset or Edit**: Clear all scores to start fresh, or edit individual round scores if needed.
+
+Work in progress, can be accessed here: [https://mickey-vee.github.io/big2-points/](https://mickey-vee.github.io/big2-points/).
