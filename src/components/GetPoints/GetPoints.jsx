@@ -117,7 +117,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
           }}
         >
           <img
-            src="./src/assets/icons/edit.svg"
+            src="./public/icons/edit.svg"
             alt="edit-button"
             className="points-form__edit-icon"
           />
