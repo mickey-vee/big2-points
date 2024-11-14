@@ -25,4 +25,4 @@ A simple React app to help you calculate points in the card game Big 2! This app
 4. **View Cumulative Scores**: Track scores across multiple rounds.
 5. **Reset or Edit**: Clear all scores to start fresh, or edit individual round scores if needed.
 
-Work in progress, can be accessed here: [https://mickey-vee.github.io/big2-points/](https://mickey-vee.github.io/big2-points/).
+Work in progress, can be accessed here: [https://mickey-vee.github.io/Big2-Points-Calculator/](https://mickey-vee.github.io/Big2-Points-Calculator/).
