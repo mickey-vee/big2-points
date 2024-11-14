@@ -32,15 +32,27 @@ const Points = ({ playerNames, gameDetails }) => {
   // updating the round
   useEffect(() => {
     if (roundDetails && roundDetails.winner) {
+      // Check if roundDetails has valid data
       setHistory((prevHistory) => {
-        return [...prevHistory, roundDetails];
+        // Find if the round already exists
+        const roundExists = prevHistory.find(
+          (item) => item.round === roundDetails.round
+        );
+
+        if (roundExists) {
+          // If round exists, map through prevHistory and update the round that matches
+          return prevHistory.map((item) =>
+            item.round === roundDetails.round
+              ? { ...item, ...roundDetails }
+              : item
+          );
+        } else {
+          // If round does not exist, add new roundDetails to prevHistory
+          return [...prevHistory, roundDetails];
+        }
       });
     }
-  }, [roundDetails]);
-
-  useEffect(() => {
-    console.log(roundDetails);
-  }, [roundDetails]);
+  }, [roundDetails]); // Re-run this effect whenever roundDetails changes
 
   return (
     <div className="rounds">

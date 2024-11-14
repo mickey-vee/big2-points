@@ -7,7 +7,8 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
     points: Array(playerNames.length).fill(""),
     winner: "",
   });
-  const [editRoundNumber, setEditRoundNumber] = useState(false);
+  const [editRound, setEditRound] = useState(false);
+  const [editRoundNumber, setEditRoundNumber] = useState("");
 
   const submitPoints = (e) => {
     e.preventDefault();
@@ -32,10 +33,18 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
       }
     });
 
+    console.log(editRoundNumber);
+
+    getGameDetails(
+      calculatePoints,
+      roundDetails.winner,
+      editRound,
+      editRoundNumber
+    );
+
     // Resets points to blank
     setRoundDetails({ points: Array(playerNames.length).fill(""), winner: "" });
-    getGameDetails(calculatePoints, roundDetails.winner);
-    setEditRoundNumber(false);
+    setEditRound(false);
   };
 
   const handlePointsChange = (e, index) => {
@@ -48,9 +57,13 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
     setRoundDetails((prevState) => ({ ...prevState, winner: player }));
   };
 
-  // Function to edit round details.
-  const editRound = () => {
-    setEditRoundNumber(true);
+  const editRoundDiv = () => {
+    // Shows div to choose round number to edit
+    setEditRound(true);
+  };
+
+  const editRoundChooser = (e) => {
+    setEditRoundNumber(e.target.value);
   };
 
   const roundsArray = Array.from(
@@ -60,12 +73,21 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
 
   return (
     <form id="points-form" onSubmit={submitPoints} className="points-form">
-      {editRoundNumber && (
+      {editRound && (
         <div className="points-form__edit-wrapper">
           <h3 className="points-form__edit-text">Choose round to edit: </h3>
-          <select name="roundNumber" id="roundNumber">
+          <select
+            name="roundNumber"
+            id="roundNumber"
+            value={editRoundNumber}
+            onChange={editRoundChooser}
+          >
             {roundsArray.map((round) => {
-              return <option value={round}>{round}</option>;
+              return (
+                <option value={round} key={round}>
+                  {round}
+                </option>
+              );
             })}
           </select>
         </div>
@@ -113,7 +135,7 @@ const GetPoints = ({ playerNames, getGameDetails, gameDetails }) => {
         <button
           className="points-form__edit-button"
           onClick={() => {
-            editRound();
+            editRoundDiv();
           }}
         >
           <img
